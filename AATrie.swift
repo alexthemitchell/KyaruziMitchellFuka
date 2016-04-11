@@ -1,5 +1,3 @@
-import Foundation
-
 public class AATrie {
     private class AANode {
         var children = Dictionary<Character, AANode>()
