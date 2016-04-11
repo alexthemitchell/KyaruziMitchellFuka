@@ -1,7 +1,6 @@
-
 import Foundation
 
-public protocol AMDictionary {
+public protocol AATrie {
   func processWords(words strWords: String, separatedBy : Character)
   func max() -> (word: String, count : UInt)?
   func min() -> (word: String, count : UInt)?
@@ -15,7 +14,7 @@ public protocol AMDictionary {
 public class AMTDictionary : AMDictionary {
   private class AMDNode {
     var children = Dictionary<Character, AMDNode>()
-    var count: UInt = 0
+    var actions: [String]
   }
 
   private let root = AMDNode()
