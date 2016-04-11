@@ -1,0 +1,26 @@
+* defined set of key words (by question authors/machine learning?)
+  * Pre-compile
+    * Add phonetic-allowable words (library?)
+    * Add typo-allowable words (Keyword Typo Generator)
+* Load trie dictionary (already implemented in Swift)
+  * Super fast lookups
+* Remove Stopwords (filter from stopword list)
+* Try each word
+* Sum actions for each word
+* Give probability based on % of total actions
+
+
+func actionsForInput(input: String) {
+  let actions = [Action : UInt]()
+  for word in input {
+    let action: Action? = dictionary[word]
+  }
+  let probabilities = [Action : Double]()
+  let sum = actions.values.sum
+
+  for (action, count) in actions {
+    probabilities[action] = Double(count) / Double(sum)
+  }
+  return probabilities
+}
+
