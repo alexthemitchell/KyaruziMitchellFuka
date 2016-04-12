@@ -1,5 +1,3 @@
-typealias AAAction = String
-
 var intentions: AATrie!
 
 func main() {
