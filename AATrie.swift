@@ -3,9 +3,9 @@ public typealias AAAction = String
 public class AATrie {
     private class AANode {
         var children = Dictionary<Character, AANode>()
-        var actions: [String]
+        var actions: [AAAction]
 
-        init(actions: [String]) {
+        init(actions: [AAAction]) {
             self.actions = actions
         }
     }
@@ -19,11 +19,12 @@ public class AATrie {
         return word
     }
 
-    public func lookup(input: String) -> [String]? {
+    public func lookup(input: String) -> [AAAction]? {
         let word = sanitizeWord(input)
         return nodeForWord(word)?.actions
     }
 
+    // This will maintain zombie nodes for quicker re-insertion.
     public func delete(word: String) {
         let node = nodeForWord(word)
         node?.actions = []
@@ -42,7 +43,7 @@ public class AATrie {
         return consider
     }
 
-    public func insertWord(input : String, actions: [String]) {
+    public func insertWord(input : String, actions: [AAAction]) {
         let word = sanitizeWord(input)
         var current = root
         for letter in word.characters {
