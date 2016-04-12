@@ -17,9 +17,26 @@ func main() {
   //Exit Loop
 }
 
-func probabilitiesForSentence(input: String) -> [String : Double] {
+func probabilitiesForSentence(sentence: String) -> [AAAction : Double] {
   var totalDetectedIntents: UInt = 0
-  var detectedIntents = [String : UInt]()
+  var detectedIntents = [AAAction : UInt]()
+  for word in sentence {
+    let intents = intentForWord(word)
+    for intent in intents {
+      if detectedIntents[intent] == nil {
+        detectedIntents[intent] = 0
+      }
+      detectedIntents[intent]++
+      totalDetectedIntents++
+    }
+  }
+
+  let probabilities = [AAAction : Double]()
+  for (intent,count) in detectedIntents {
+    let percentage = Double(count)/Double(totalDetectedIntents)
+    probabilities[intent] = percentage
+  }
+  return probabilities
 }
 
 /**
@@ -43,6 +60,6 @@ func loadWordIntentions(filepath: String) -> AATrie {
 
 }
 
-func intentForWord(word: String) -> AAAction {
+func intentsForWord(word: String) -> [AAAction] {
 
 }
