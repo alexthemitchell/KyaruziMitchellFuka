@@ -1,14 +1,25 @@
 typealias AAAction = String
 
+var intentions: AATrie!
+
 func main() {
-  // Use filename as Action identifier
+  // We should crash if this argument is not given.
+  let intentionPath = Process.arguments[arg1]
+
+  intentions = loadWordIntentions(intentionPath)
+
+  //Loop
+    // input
+    let sentence: String!
+
+    let probabilities = probabilitiesForSentence(sentence)
+    // print probabilities
+  //Exit Loop
+}
+
+func probabilitiesForSentence(input: String) -> [String : Double] {
   var totalDetectedIntents: UInt = 0
   var detectedIntents = [String : UInt]()
-
-  var Dictionary = AATrie()
-
-  // read input
-
 }
 
 /**
@@ -19,7 +30,7 @@ func main() {
  *   string format. This will be the key for the output hash table's
  *   probability.
  *
- * e.g. ~/WordIntentions.map
+ * e.g. /home/user/WordIntentions.map
  * ~~~~~~~~~~~~~~~~~~~~~~~~~
  *  quadratic   quadForm
  *  kwadratic   quadForm
@@ -28,7 +39,7 @@ func main() {
  *  theorem     pythTheorem
  *  formula     quadForm,pythTheorem
  */
-func loadWordIntentions(filepath: String) {
+func loadWordIntentions(filepath: String) -> AATrie {
 
 }
 
