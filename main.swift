@@ -59,6 +59,9 @@ func loadWordIntentions(filepath: String) -> AATrie {
 }
 
 func intentsForWord(word: String) -> [AAAction] {
-  let intents = intentions.lookup(word)
-  return intents == nil ? [] : intents
+    if let intents = intentions.lookup.word {
+        return intents
+    } else {
+        return []
+    }
 }
