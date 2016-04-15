@@ -1,7 +1,10 @@
+Assumption: We are given a set of key words
+
 * defined set of key words (by question authors/machine learning?)
   * Pre-compile
     * Add phonetic-allowable words (library?)
     * Add typo-allowable words (Keyword Typo Generator)
+    * Add all the 
 * Load trie dictionary (already implemented in Swift)
   * Super fast lookups
 * Remove Stopwords (filter from stopword list)

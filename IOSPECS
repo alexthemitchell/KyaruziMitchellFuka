@@ -1,0 +1,11 @@
+Based on Fuka's Examples, we have determined the following range of input is appropriate:
+"I don't know" --> Help
+"I don't even care anymore" --> Unrecognized Method
+"Just a guess" --> Help
+"I'll try completing the square" --> Complete The Square
+"What about if I completed the square" --> Complete The Square
+"I listened to John, he told me to complete the square" --> Complete The Square
+"I might use the subtitutittiion method" --> Substitution
+"Quadratic Formula Square Completion" --> Help
+
+Using our probabilities, we will set a threshold (atleast 50%) where input that is under that is either Unrecognized or Help
