@@ -56,7 +56,11 @@ func probabilitiesForSentence(sentence: String) -> [AAAction : Double] {
  *  formula     quadForm,pythTheorem
  */
 func loadWordIntentions(filepath: String) -> AATrie {
-  return AATrie()
+  if let content = try? String(contentsOfFile: filepath, encoding: NSUTF8StringEncoding) {
+    return parseFileText(content)
+  } else {
+      fatalError("\(filepath) was not readable")
+  }
 }
 
 func parseFileText(fullText: String) -> AATrie {
