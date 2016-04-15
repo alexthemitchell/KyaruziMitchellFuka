@@ -27,7 +27,7 @@ public class WordGenerator {
 	public static void main(String[] args) {
 		/**
 		 * While we only support 6 functions and methods, the input file of keywords 
-		 * should have the following format where each keyword is separated by a tab
+		 * should have the following format where each keyword is separated by four spaces
 		 * and the different intentions that are associated with that word. The list
 		 * below is the complete list for the 6 beginning methods we have. The starting
 		 * file is provided with the code. Please name the input file as "FukaInput"
@@ -61,7 +61,7 @@ public class WordGenerator {
 		for (String key : keywords.keySet()) {
 			List<String> typoList = generateTypos(key);
 			for (String word2 : typoList){
-				writer.printf("%s\t%s\n", word2, keywords.get(key));
+				writer.printf("%s    %s\n", word2, keywords.get(key));
 			}
 		}//for
 		
