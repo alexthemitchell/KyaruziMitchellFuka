@@ -4,12 +4,15 @@
 package libgenerator;
 
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 /**
  * @author Ajuna Kyaruzi
@@ -21,33 +24,67 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		//if a keyword has multiple actions put a comma but no space
+		/**
+		 * While we only support 6 functions and methods, the input file of keywords 
+		 * should have the following format where each keyword is separated by a tab
+		 * and the different intentions that are associated with that word. The list
+		 * below is the complete list for the 6 beginning methods we have. The starting
+		 * file is provided with the code. Please name the input file as "FukaInput"
+		 * 
+		 * Complete	compSquare
+		 * Square	compSquare,squareRoot
+		 * Quadratic	quadForm,quadFact
+		 * Formula	quadForm
+		 * Factor	quadFact
+		 * Method	eliMethod,subMethod
+		 * Elimination	eliMethod
+		 * Substitution	subMethod
+		 * 
+		 */
 		
-		String[] keywords = {"Quadratic", "Formula", "Test"};
-		//figure out how to read into keywords
-	
 		PrintWriter writer = null;
 		try {
-			writer = new PrintWriter("KM-Fuka-1", "UTF-8");
+			writer = new PrintWriter("WordIntentions", "UTF-8");
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Bad Output Formatting");
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Bad Output Formatting");
 		}
 		
-		for (String word : keywords) {
-			word = word.toLowerCase();
-			List<String> typoList = generateTypos(word);
+		Map<String, String> keywords = getKeyWords("FukaInput");
+		
+		for (String key : keywords.keySet()) {
+			List<String> typoList = generateTypos(key);
 			for (String word2 : typoList){
-				writer.printf("%s\t%s\n", word2, word);
+				writer.printf("%s\t%s\n", word2, keywords.get(key));
 			}
 		}
 		
 		writer.close();
 	}
 
+	private static Map<String, String> getKeyWords(String inputFile){
+			
+		Map<String, String> res = new HashMap<String, String>();
+		
+		try {
+		Scanner inputScanner = new Scanner(new FileReader(inputFile)).useDelimiter("[\\s+]");
+			while(inputScanner.hasNext()){
+				String key = inputScanner.next().toLowerCase();
+				String value = null ;
+				if (inputScanner.hasNext()){
+					value = inputScanner.next();
+				}
+				res.put(key, value);
+			}		
+		} catch (IOException e) {
+			System.out.println("Trouble with input file");
+		}
+		
+		return res;
+	}
+
+	
 	private static List<String> generatePhonetic(String word) {
 		// TODO Use the Double Metaphone Library 
 		// https://commons.apache.org/proper/commons-codec/apidocs/org/apache/commons/codec/language/DoubleMetaphone.html
@@ -113,7 +150,6 @@ public class Main {
 
 	private static List<String> generateTypos(String str) {
 			List<String> res = new LinkedList<String>();
-			System.out.println(str);
 			int strLength = str.length();
 			Map<String, String> prox = array_prox();
 			for (int a = 0; a < strLength; a++) {

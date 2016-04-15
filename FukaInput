@@ -1,0 +1,8 @@
+Complete	compSquare
+Square	compSquare,squareRoot
+Quadratic	quadForm,quadFact
+Formula	quadForm
+Factor	quadFact
+Method	eliMethod,subMethod
+Elimination	eliMethod
+Substitution	subMethod
