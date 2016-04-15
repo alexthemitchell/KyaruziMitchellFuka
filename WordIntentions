@@ -1,4 +1,4 @@
-Test Output File Created At 2016/04/15 10:28:03
+square    compSquare,squareRoot
 qquare    compSquare,squareRoot
 wquare    compSquare,squareRoot
 equare    compSquare,squareRoot
@@ -27,6 +27,7 @@ squars    compSquare,squareRoot
 squard    compSquare,squareRoot
 squarf    compSquare,squareRoot
 squarr    compSquare,squareRoot
+substitution    subMethod
 qubstitution    subMethod
 wubstitution    subMethod
 eubstitution    subMethod
@@ -88,6 +89,7 @@ substitutiog    subMethod
 substitutioh    subMethod
 substitutioj    subMethod
 substitutiom    subMethod
+method    eliMethod,subMethod
 nethod    eliMethod,subMethod
 hethod    eliMethod,subMethod
 jethod    eliMethod,subMethod
@@ -123,6 +125,7 @@ methor    eliMethod,subMethod
 methof    eliMethod,subMethod
 methov    eliMethod,subMethod
 methoc    eliMethod,subMethod
+formula    quadForm
 cormula    quadForm
 dormula    quadForm
 eormula    quadForm
@@ -159,6 +162,7 @@ formulq    quadForm
 formulw    quadForm
 formulz    quadForm
 formulx    quadForm
+quadratic    quadForm,quadFact
 wuadratic    quadForm,quadFact
 auadratic    quadForm,quadFact
 suadratic    quadForm,quadFact
@@ -203,6 +207,7 @@ quadratis    quadForm,quadFact
 quadratid    quadForm,quadFact
 quadratif    quadForm,quadFact
 quadrativ    quadForm,quadFact
+complete    compSquare
 xomplete    compSquare
 somplete    compSquare
 domplete    compSquare
@@ -239,6 +244,7 @@ complets    compSquare
 completd    compSquare
 completf    compSquare
 completr    compSquare
+factor    quadFact
 cactor    quadFact
 dactor    quadFact
 eactor    quadFact
@@ -270,6 +276,7 @@ factod    quadFact
 factof    quadFact
 factog    quadFact
 factot    quadFact
+elimination    eliMethod
 wlimination    eliMethod
 slimination    eliMethod
 dlimination    eliMethod

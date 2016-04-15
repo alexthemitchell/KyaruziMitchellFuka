@@ -59,14 +59,15 @@ public class WordGenerator {
 			System.out.println("Bad Output Formatting");
 		}
 		
-		writer.println("Test Output File Created At " + dateFormat.format(date));
+		//writer.println("Test Output File Created At " + dateFormat.format(date));
 		Map<String, String> keywords = getKeyWords(inputFile);
 		
 		for (String key : keywords.keySet()) {
+			String intentions = keywords.get(key);
+			writer.printf("%s    %s\n", key, intentions);
 			List<String> typoList = generateTypos(key);
-			writer.printf("%s    %s\n", key, keywords.get(key));
-			for (String word2 : typoList){
-				writer.printf("%s    %s\n", word2, keywords.get(key));
+			for (String typo : typoList){
+				writer.printf("%s    %s\n", typo, intentions);
 			}
 		}//for
 		
