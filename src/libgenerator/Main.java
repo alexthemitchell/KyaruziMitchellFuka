@@ -6,9 +6,10 @@ package libgenerator;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
+import java.util.Map;
 
 /**
  * @author Ajuna Kyaruzi
@@ -22,12 +23,12 @@ public class Main {
 	public static void main(String[] args) {
 		//if a keyword has multiple actions put a comma but no space
 		
-		String[] keywords = {"one", "two", "three"};
+		String[] keywords = {"Quadratic", "Formula", "Test"};
 		//figure out how to read into keywords
 	
 		PrintWriter writer = null;
 		try {
-			writer = new PrintWriter("the-file-name.txt", "UTF-8");
+			writer = new PrintWriter("KM-Fuka-1", "UTF-8");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -37,6 +38,7 @@ public class Main {
 		}
 		
 		for (String word : keywords) {
+			word = word.toLowerCase();
 			List<String> typoList = generateTypos(word);
 			for (String word2 : typoList){
 				writer.printf("%s\t%s\n", word2, word);
@@ -65,50 +67,59 @@ public class Main {
 		}// for
 		return res;
 	}
+	
+	private static Map<String, String> array_prox (){
+		Map<String,String> prox = new HashMap<String,String>(40);
+		
+	    prox.put("a", "qwzx");
+	    prox.put("b", "vfghn");
+	    prox.put("c", "xsdfv");
+	    prox.put("d", "xswerfvc");
+	    prox.put("e", "wsdfr");
+	    prox.put("f", "cdertgbv");
+	    prox.put("g", "rfvtbyhn");
+	    prox.put("h", "bgtyujmn");
+	    prox.put("i", "ujklo");
+	    prox.put("j", "nhyuikm");
+	    prox.put("k", "ujmlo");
+	    prox.put("l", "poikm");
+	    prox.put("m", "nhjkl");
+	    prox.put("n", "bghjm");
+	    prox.put("o", "iklp");
+	    prox.put("p", "ol");
+	    prox.put("q", "was");
+	    prox.put("r", "edfgt");
+	    prox.put("s", "qwezxc");
+	    prox.put("t", "rfghy");
+	    prox.put("u", "yhjki");
+	    prox.put("v", "cdfgb");    
+	    prox.put("w", "qasde");
+	    prox.put("x", "zasdc");
+	    prox.put("y", "tghju");
+	    prox.put("z", "xsa");
+	    prox.put("1", "qw");
+	    prox.put("2", "qwe");
+	    prox.put("3", "wer");
+	    prox.put("4", "ert");
+	    prox.put("5", "rty");
+	    prox.put("6", "tyu");
+	    prox.put("7", "yui");
+	    prox.put("8", "uio");
+	    prox.put("9", "iop");
+	    prox.put("0", "op");
+
+	    return prox;
+	}
 
 	private static List<String> generateTypos(String str) {
 			List<String> res = new LinkedList<String>();
-			String[] array_prox = new String[36];
+			System.out.println(str);
 			int strLength = str.length();
-			
-		    array_prox['a'] = "qwzx";
-		    array_prox['b'] = "vfghn";
-		    array_prox['c'] = "xsdfv";
-		    array_prox['d'] = "xswerfvc";
-		    array_prox['e'] = "wsdfr";
-		    array_prox['f'] = "cdertgbv";
-		    array_prox['g'] = "rfvtbyhn";
-		    array_prox['h'] = "bgtyujmn";
-		    array_prox['i'] = "ujklo";
-		    array_prox['j'] = "nhyuikm";
-		    array_prox['k'] = "ujmlo";
-		    array_prox['l'] = "poikm";
-		    array_prox['m'] = "nhjkl";
-		    array_prox['n'] = "bghjm";
-		    array_prox['o'] = "iklp";
-		    array_prox['p'] = "ol";
-		    array_prox['r'] = "edfgt";
-		    array_prox['s'] = "qwezxc";
-		    array_prox['t'] = "rfghy";
-		    array_prox['u'] = "yhjki";
-		    array_prox['v'] = "cdfgb";    
-		    array_prox['w'] = "qasde";
-		    array_prox['x'] = "zasdc";
-		    array_prox['y'] = "tghju";
-		    array_prox['z'] = "xsa";
-		    array_prox['1'] = "qw";
-		    array_prox['2'] = "qwe";
-		    array_prox['3'] = "wer";
-		    array_prox['4'] = "ert";
-		    array_prox['5'] = "rty";
-		    array_prox['6'] = "tyu";
-		    array_prox['7'] = "yui";
-		    array_prox['8'] = "uio";
-		    array_prox['9'] = "iop";
-		    array_prox['0'] = "op";
-
+			Map<String, String> prox = array_prox();
 			for (int a = 0; a < strLength; a++) {
-			    String temp = array_prox[str.charAt(a)];    
+
+			    String temp = prox.get(str.substring(a, a+1)); 
+			    
 			    int len = temp.length();
 				for (int b = 0; b < len ; b++) {
 				    String typo = replaceAt(str, a, temp.charAt(b));
