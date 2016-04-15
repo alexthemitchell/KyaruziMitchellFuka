@@ -1,24 +1,25 @@
+import Foundation
+
 var intentions: AATrie!
 
 func main() {
-  // We should crash if this argument is not given.
-  let intentionPath = Process.arguments[1]
+  let arguments = Process.arguments
+  let intentionPath = arguments[1]
 
   intentions = loadWordIntentions(intentionPath)
 
-  //Loop
-  // input
-  if let sentence = readLine() {
-    let probabilities = probabilitiesForSentence(sentence)
-    // print probabilities
+  while true {
+    if let sentence = readLine() {
+      let probabilities = probabilitiesForSentence(sentence)
+      print(probabilities)
+    }
   }
-  //Exit Loop
 }
 
 func probabilitiesForSentence(sentence: String) -> [AAAction : Double] {
   var totalDetectedIntents: UInt = 0
   var detectedIntents = [AAAction : UInt]()
-  for word in sentence.split(" ") {
+  for word in sentence.componentsSeparatedByString(" ") {
     let intents = intentsForWord(word)
     for intent in intents {
       if detectedIntents[intent] == nil {
@@ -58,6 +59,18 @@ func loadWordIntentions(filepath: String) -> AATrie {
   return AATrie()
 }
 
+func parseFileText(fullText: String) -> AATrie {
+  let trie = AATrie()
+  let contents = fullText.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+  // Every other component will be a keyword, the following will be the actions
+  for (var i = 0; i < contents.count; i += 2) {
+    let keyword = contents[i]
+    let actions = contents[i+1].componentsSeparatedByString(",")
+    trie.insertWord(keyword, actions: actions)
+  }
+  return trie
+}
+
 func intentsForWord(word: String) -> [AAAction] {
   if let intents = intentions.lookup(word) {
     return intents
@@ -65,5 +78,3 @@ func intentsForWord(word: String) -> [AAAction] {
     return []
   }
 }
-
-extension String : CollectionType {}
