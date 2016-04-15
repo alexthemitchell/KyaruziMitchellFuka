@@ -1,9 +1,9 @@
 # Ajuna Kyaruzi and Alex Mitchell's 301 NLP Solution
 ## Preliminary Keyword Obfuscation
 ### Build
-* javac src/libgenerator/WordGenerator.java
+* `javac src/libgenerator/WordGenerator.java`
 ### Execute
-* java src/libgenerator/WordGenerator
+* `java src/libgenerator/WordGenerator`
 * Use STDIN to write name of InputFile
 ## Runtime Student Input Interpreter
 ### Build
