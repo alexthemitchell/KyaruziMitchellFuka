@@ -8,6 +8,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -18,11 +22,8 @@ import java.util.Scanner;
  * @author Ajuna Kyaruzi
  * @lastModified April 15th, 2016
  */
-public class Main {
+public class WordGenerator {
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
 		/**
 		 * While we only support 6 functions and methods, the input file of keywords 
@@ -41,6 +42,9 @@ public class Main {
 		 * Substitution	subMethod
 		 * 
 		 */
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		
 		
 		PrintWriter writer = null;
 		try {
@@ -51,6 +55,7 @@ public class Main {
 			System.out.println("Bad Output Formatting");
 		}
 		
+		writer.println("Test Output File Created At " + dateFormat.format(date));
 		Map<String, String> keywords = getKeyWords("FukaInput");
 		
 		for (String key : keywords.keySet()) {
@@ -58,14 +63,14 @@ public class Main {
 			for (String word2 : typoList){
 				writer.printf("%s\t%s\n", word2, keywords.get(key));
 			}
-		}
+		}//for
 		
 		writer.close();
-	}
+	}//main
 
 	private static Map<String, String> getKeyWords(String inputFile){
 			
-		Map<String, String> res = new HashMap<String, String>();
+		Map<String, String> keyWordMap = new HashMap<String, String>();
 		
 		try {
 		Scanner inputScanner = new Scanner(new FileReader(inputFile)).useDelimiter("[\\s+]");
@@ -75,14 +80,33 @@ public class Main {
 				if (inputScanner.hasNext()){
 					value = inputScanner.next();
 				}
-				res.put(key, value);
+				keyWordMap.put(key, value);
 			}		
 		} catch (IOException e) {
 			System.out.println("Trouble with input file");
 		}
 		
-		return res;
-	}
+		return keyWordMap;
+	}//getKeyWords
+	
+	private static List<String> generateTypos(String str) {
+		List<String> lst = new LinkedList<String>();
+		int strLength = str.length();
+		Map<String, String> prox = proximityTypoMap();
+		
+		for (int a = 0; a < strLength; a++) {
+
+		    String temp = prox.get(str.substring(a, a+1)); 
+		    
+		    int len = temp.length();
+			for (int b = 0; b < len ; b++) {
+			    String typo = replaceAt(str, a, temp.charAt(b));
+			    lst.add(typo);
+			}
+		}//for
+
+		return lst;
+	}//generateTypos
 
 	
 	private static List<String> generatePhonetic(String word) {
@@ -90,7 +114,7 @@ public class Main {
 		// https://commons.apache.org/proper/commons-codec/apidocs/org/apache/commons/codec/language/DoubleMetaphone.html
 		// Will be supported in next version
 		return null;
-	}
+	}//generatePhonetic
 	
 	private static String replaceAt(String str, int index, char c){
 		int len = str.length();
@@ -103,9 +127,9 @@ public class Main {
 			}
 		}// for
 		return res;
-	}
+	}//replaceAt
 	
-	private static Map<String, String> array_prox (){
+	private static Map<String, String> proximityTypoMap(){
 		Map<String,String> prox = new HashMap<String,String>(40);
 		
 	    prox.put("a", "qwzx");
@@ -146,23 +170,6 @@ public class Main {
 	    prox.put("0", "op");
 
 	    return prox;
-	}
-
-	private static List<String> generateTypos(String str) {
-			List<String> res = new LinkedList<String>();
-			int strLength = str.length();
-			Map<String, String> prox = array_prox();
-			for (int a = 0; a < strLength; a++) {
-
-			    String temp = prox.get(str.substring(a, a+1)); 
-			    
-			    int len = temp.length();
-				for (int b = 0; b < len ; b++) {
-				    String typo = replaceAt(str, a, temp.charAt(b));
-				    res.add(typo);
-				}
-			}
-
-			return res;
-	}
-}
+	}//proximityTypoMap
+	
+}//class Main
