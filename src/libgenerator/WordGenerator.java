@@ -8,7 +8,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,7 +29,8 @@ public class WordGenerator {
 		 * should have the following format where each keyword is separated by four spaces
 		 * and the different intentions that are associated with that word. The list
 		 * below is the complete list for the 6 beginning methods we have. The starting
-		 * file is provided with the code. Please name the input file as "FukaInput"
+		 * file is provided with the code. Please provide the name of the input file as
+		 * command line input when prompted.
 		 * 
 		 * Complete	compSquare
 		 * Square	compSquare,squareRoot
@@ -45,6 +45,10 @@ public class WordGenerator {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
 		
+		Scanner scan = new Scanner(System.in);
+		System.out.print("Please provide name of your input file: ");
+		String inputFile = scan.nextLine();
+		scan.close();
 		
 		PrintWriter writer = null;
 		try {
@@ -56,10 +60,11 @@ public class WordGenerator {
 		}
 		
 		writer.println("Test Output File Created At " + dateFormat.format(date));
-		Map<String, String> keywords = getKeyWords("FukaInput");
+		Map<String, String> keywords = getKeyWords(inputFile);
 		
 		for (String key : keywords.keySet()) {
 			List<String> typoList = generateTypos(key);
+			writer.printf("%s    %s\n", key, keywords.get(key));
 			for (String word2 : typoList){
 				writer.printf("%s    %s\n", word2, keywords.get(key));
 			}
