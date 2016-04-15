@@ -1,24 +1,11 @@
+import Foundation
+
 var intentions: AATrie!
-
-func main() {
-  // We should crash if this argument is not given.
-  let intentionPath = Process.arguments[1]
-
-  intentions = loadWordIntentions(intentionPath)
-
-  //Loop
-  // input
-  if let sentence = readLine() {
-    let probabilities = probabilitiesForSentence(sentence)
-    // print probabilities
-  }
-  //Exit Loop
-}
 
 func probabilitiesForSentence(sentence: String) -> [AAAction : Double] {
   var totalDetectedIntents: UInt = 0
   var detectedIntents = [AAAction : UInt]()
-  for word in sentence.split(" ") {
+  for word in sentence.componentsSeparatedByString(" ") {
     let intents = intentsForWord(word)
     for intent in intents {
       if detectedIntents[intent] == nil {
@@ -53,9 +40,32 @@ func probabilitiesForSentence(sentence: String) -> [AAAction : Double] {
  *  pytgahorean pythTheorem
  *  theorem     pythTheorem
  *  formula     quadForm,pythTheorem
+ * .
+ * .
+ * .
+ * \n
  */
 func loadWordIntentions(filepath: String) -> AATrie {
-  return AATrie()
+  if let content = try? String(contentsOfFile: filepath, encoding: NSUTF8StringEncoding) {
+    return parseFileText(content)
+  } else {
+      fatalError("\(filepath) was not readable")
+  }
+}
+
+func parseFileText(fullText: String) -> AATrie {
+  let trie = AATrie()
+  var pairs = fullText.componentsSeparatedByString("\n")
+  // The newline at the end of the file generates an empty pair
+  pairs.removeLast()
+  for pair in pairs {
+    let entries = pair.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+    print(entries)
+    let keyword = entries[0]
+    let actions = entries[1].componentsSeparatedByString(",")
+    trie.insertWord(keyword, actions: actions)
+  }
+  return trie
 }
 
 func intentsForWord(word: String) -> [AAAction] {
@@ -66,4 +76,15 @@ func intentsForWord(word: String) -> [AAAction] {
   }
 }
 
-extension String : CollectionType {}
+let arguments = Process.arguments
+let intentionPath = arguments[1]
+
+intentions = loadWordIntentions(intentionPath)
+
+while true {
+  if let sentence = readLine() {
+    let probabilities = probabilitiesForSentence(sentence)
+    let data = try! NSJSONSerialization.dataWithJSONObject(probabilities, options: .PrettyPrinted)
+    print(String(data: data, encoding: NSUTF8StringEncoding)!)
+  }
+}
