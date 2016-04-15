@@ -64,10 +64,10 @@ public class WordGenerator {
 		
 		for (String key : keywords.keySet()) {
 			String intentions = keywords.get(key);
-			writer.printf("%s    %s\n", key, intentions);
+			writer.printf("%s %s\n", key, intentions);
 			List<String> typoList = generateTypos(key);
 			for (String typo : typoList){
-				writer.printf("%s    %s\n", typo, intentions);
+				writer.printf("%s %s\n", typo, intentions);
 			}
 		}//for
 		
