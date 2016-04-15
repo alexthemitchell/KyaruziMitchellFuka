@@ -20,6 +20,7 @@ import java.util.Scanner;
 /**
  * @author Ajuna Kyaruzi
  * @lastModified April 15th, 2016
+ * @citation http://techslides.com/typos-script-to-generate-misspellings
  */
 public class WordGenerator {
 
