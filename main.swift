@@ -2,34 +2,34 @@ var intentions: AATrie!
 
 func main() {
   // We should crash if this argument is not given.
-  let intentionPath = Process.arguments[arg1]
+  let intentionPath = Process.arguments[1]
 
   intentions = loadWordIntentions(intentionPath)
 
   //Loop
-    // input
-    let sentence: String!
-
+  // input
+  if let sentence = readLine() {
     let probabilities = probabilitiesForSentence(sentence)
     // print probabilities
+  }
   //Exit Loop
 }
 
 func probabilitiesForSentence(sentence: String) -> [AAAction : Double] {
   var totalDetectedIntents: UInt = 0
   var detectedIntents = [AAAction : UInt]()
-  for word in sentence {
-    let intents = intentForWord(word)
+  for word in sentence.split(" ") {
+    let intents = intentsForWord(word)
     for intent in intents {
       if detectedIntents[intent] == nil {
         detectedIntents[intent] = 0
       }
-      detectedIntents[intent]++
-      totalDetectedIntents++
+      detectedIntents[intent]! += 1
+      totalDetectedIntents += 1
     }
   }
 
-  let probabilities = [AAAction : Double]()
+  var probabilities = [AAAction : Double]()
   for (intent,count) in detectedIntents {
     let percentage = Double(count)/Double(totalDetectedIntents)
     probabilities[intent] = percentage
@@ -55,13 +55,15 @@ func probabilitiesForSentence(sentence: String) -> [AAAction : Double] {
  *  formula     quadForm,pythTheorem
  */
 func loadWordIntentions(filepath: String) -> AATrie {
-
+  return AATrie()
 }
 
 func intentsForWord(word: String) -> [AAAction] {
-    if let intents = intentions.lookup.word {
-        return intents
-    } else {
-        return []
-    }
+  if let intents = intentions.lookup(word) {
+    return intents
+  } else {
+    return []
+  }
 }
+
+extension String : CollectionType {}
