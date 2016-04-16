@@ -20,5 +20,5 @@
 * Main run loops reads sentence on STDIN, outputs JSON with probabilities to STDOUT
 
 ## Known Deficiencies
-* Does not natively detect negation
+* Does not natively interpret negation
 * Should add phonetics to pre-compilation hashing function
