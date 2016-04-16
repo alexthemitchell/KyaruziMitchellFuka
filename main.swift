@@ -62,7 +62,6 @@ func parseFileText(fullText: String) -> AATrie {
     let entries = pair.componentsSeparatedByString(" ")
     let keyword = entries[0]
     let actions = entries[1].componentsSeparatedByString(",")
-    print("\(keyword): \(actions)")
     trie.insertWord(keyword, actions: actions)
   }
   return trie

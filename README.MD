@@ -2,10 +2,10 @@
 ## Preliminary Keyword Obfuscation
 
 ### Build
-* `javac src/libgenerator/WordGenerator.java`
+* `javac WordGenerator.java`
 
 ### Execute
-* `java src/libgenerator/WordGenerator`
+* `java WordGenerator`
 * Use STDIN to write name of InputFile
 
 ## Runtime Student Input Interpreter
@@ -22,3 +22,5 @@
 ## Known Deficiencies
 * Does not natively interpret negation
 * Should add phonetics to pre-compilation hashing function
+* Punctuation is not stripped from the students' input, but should be
+* Partial word matches should add confidence

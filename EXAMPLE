@@ -1,0 +1,142 @@
+$ javac WordGenerator.java
+$ java WordGenerator
+Please provide name of your input file: EXAMPLEINPUT
+$ xcrun -sdk macosx swiftc AATrie.swift main.swift
+$ ./main WordIntentions
+Keywords loaded. Listening on STDIN
+Use the complete the squares method
+{
+  "probabilities" : {
+    "subMethod" : 0.3333333333333333,
+    "compSquare" : 0.3333333333333333,
+    "eliMethod" : 0.3333333333333333
+  },
+  "actionWords" : 3,
+  "computeTime" : 0.3309845924377441
+}
+I'll use the method of completing the squares
+{
+  "probabilities" : {
+    "subMethod" : 0.5,
+    "eliMethod" : 0.5
+  },
+  "actionWords" : 2,
+  "computeTime" : 0.191032886505127
+}
+komplete da skware
+{
+  "probabilities" : {
+
+  },
+  "actionWords" : 0,
+  "computeTime" : 0.09101629257202148
+}
+I'm not sure
+{
+  "probabilities" : {
+
+  },
+  "actionWords" : 0,
+  "computeTime" : 0.09101629257202148
+}
+complete-the-squares method
+{
+  "probabilities" : {
+    "subMethod" : 0.5,
+    "eliMethod" : 0.5
+  },
+  "actionWords" : 2,
+  "computeTime" : 0.1440048217773438
+}
+I'd use the quadratic formula cuz itz my fave
+{
+  "probabilities" : {
+    "quadFact" : 0.3333333333333333,
+    "quadForm" : 0.6666666666666666
+  },
+  "actionWords" : 3,
+  "computeTime" : 0.2639889717102051
+}
+Dunno, maybe quadratic?
+{
+  "probabilities" : {
+
+  },
+  "actionWords" : 0,
+  "computeTime" : 0.1170039176940918
+}
+Dunno, maybe quadratic
+{
+  "probabilities" : {
+    "quadFact" : 0.5,
+    "quadForm" : 0.5
+  },
+  "actionWords" : 2,
+  "computeTime" : 0.196993350982666
+}
+I'll factor quadratics
+{
+  "probabilities" : {
+    "quadFact" : 1
+  },
+  "actionWords" : 1,
+  "computeTime" : 0.146031379699707
+}
+I plan to complete the squares
+{
+  "probabilities" : {
+    "compSquare" : 1
+  },
+  "actionWords" : 1,
+  "computeTime" : 0.1360177993774414
+}
+Do a square root
+{
+  "probabilities" : {
+    "compSquare" : 0.5,
+    "squareRoot" : 0.5
+  },
+  "actionWords" : 2,
+  "computeTime" : 0.1310110092163086
+}
+Utilize the methods of square roots
+{
+  "probabilities" : {
+    "compSquare" : 0.5,
+    "squareRoot" : 0.5
+  },
+  "actionWords" : 2,
+  "computeTime" : 0.1490116119384766
+}
+Solve by substitution
+{
+  "probabilities" : {
+    "subMethod" : 1
+  },
+  "actionWords" : 1,
+  "computeTime" : 0.238955020904541
+}
+I have no ida
+{
+  "probabilities" : {
+
+  },
+  "actionWords" : 0,
+  "computeTime" : 0.09196996688842773
+}
+help
+{
+  "probabilities" : {
+
+  },
+  "actionWords" : 0,
+  "computeTime" : 0.08797645568847656
+}
+give me a hint
+{
+  "probabilities" : {
+
+  },
+  "actionWords" : 0,
+  "computeTime" : 0.1009702682495117
+}
