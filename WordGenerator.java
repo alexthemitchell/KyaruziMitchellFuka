@@ -1,8 +1,3 @@
-/**
- * 
- */
-package libgenerator;
-
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -26,13 +21,13 @@ public class WordGenerator {
 
 	public static void main(String[] args) {
 		/**
-		 * While we only support 6 functions and methods, the input file of keywords 
+		 * While we only support 6 functions and methods, the input file of keywords
 		 * should have the following format where each keyword is separated by four spaces
 		 * and the different intentions that are associated with that word. The list
 		 * below is the complete list for the 6 beginning methods we have. The starting
 		 * file is provided with the code. Please provide the name of the input file as
 		 * command line input when prompted.
-		 * 
+		 *
 		 * Complete	compSquare
 		 * Square	compSquare,squareRoot
 		 * Quadratic	quadForm,quadFact
@@ -41,16 +36,16 @@ public class WordGenerator {
 		 * Method	eliMethod,subMethod
 		 * Elimination	eliMethod
 		 * Substitution	subMethod
-		 * 
+		 *
 		 */
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
-		
+
 		Scanner scan = new Scanner(System.in);
 		System.out.print("Please provide name of your input file: ");
 		String inputFile = scan.nextLine();
 		scan.close();
-		
+
 		PrintWriter writer = null;
 		try {
 			writer = new PrintWriter("WordIntentions", "UTF-8");
@@ -59,10 +54,10 @@ public class WordGenerator {
 		} catch (UnsupportedEncodingException e) {
 			System.out.println("Bad Output Formatting");
 		}
-		
+
 		//writer.println("Test Output File Created At " + dateFormat.format(date));
 		Map<String, String> keywords = getKeyWords(inputFile);
-		
+
 		for (String key : keywords.keySet()) {
 			String intentions = keywords.get(key);
 			writer.printf("%s %s\n", key, intentions);
@@ -71,14 +66,14 @@ public class WordGenerator {
 				writer.printf("%s %s\n", typo, intentions);
 			}
 		}//for
-		
+
 		writer.close();
 	}//main
 
 	private static Map<String, String> getKeyWords(String inputFile){
-			
+
 		Map<String, String> keyWordMap = new HashMap<String, String>();
-		
+
 		try {
 		Scanner inputScanner = new Scanner(new FileReader(inputFile)).useDelimiter("[\\s+]");
 			while(inputScanner.hasNext()){
@@ -88,23 +83,23 @@ public class WordGenerator {
 					value = inputScanner.next();
 				}
 				keyWordMap.put(key, value);
-			}		
+			}
 		} catch (IOException e) {
 			System.out.println("Trouble with input file");
 		}
-		
+
 		return keyWordMap;
 	}//getKeyWords
-	
+
 	private static List<String> generateTypos(String str) {
 		List<String> lst = new LinkedList<String>();
 		int strLength = str.length();
 		Map<String, String> prox = proximityTypoMap();
-		
+
 		for (int a = 0; a < strLength; a++) {
 
-		    String temp = prox.get(str.substring(a, a+1)); 
-		    
+		    String temp = prox.get(str.substring(a, a+1));
+
 		    int len = temp.length();
 			for (int b = 0; b < len ; b++) {
 			    String typo = replaceAt(str, a, temp.charAt(b));
@@ -115,14 +110,14 @@ public class WordGenerator {
 		return lst;
 	}//generateTypos
 
-	
+
 	private static List<String> generatePhonetic(String word) {
-		// TODO Use the Double Metaphone Library 
+		// TODO Use the Double Metaphone Library
 		// https://commons.apache.org/proper/commons-codec/apidocs/org/apache/commons/codec/language/DoubleMetaphone.html
 		// Will be supported in next version
 		return null;
 	}//generatePhonetic
-	
+
 	private static String replaceAt(String str, int index, char c){
 		int len = str.length();
 		String res = "";
@@ -135,10 +130,10 @@ public class WordGenerator {
 		}// for
 		return res;
 	}//replaceAt
-	
+
 	private static Map<String, String> proximityTypoMap(){
 		Map<String,String> prox = new HashMap<String,String>(40);
-		
+
 	    prox.put("a", "qwzx");
 	    prox.put("b", "vfghn");
 	    prox.put("c", "xsdfv");
@@ -160,7 +155,7 @@ public class WordGenerator {
 	    prox.put("s", "qwezxc");
 	    prox.put("t", "rfghy");
 	    prox.put("u", "yhjki");
-	    prox.put("v", "cdfgb");    
+	    prox.put("v", "cdfgb");
 	    prox.put("w", "qasde");
 	    prox.put("x", "zasdc");
 	    prox.put("y", "tghju");
@@ -178,5 +173,5 @@ public class WordGenerator {
 
 	    return prox;
 	}//proximityTypoMap
-	
+
 }//class Main
