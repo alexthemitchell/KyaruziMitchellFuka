@@ -20,6 +20,7 @@
 * Main run loops reads sentence on STDIN, outputs JSON with probabilities to STDOUT
 
 ## Known Deficiencies
+* Requires Apple proprietary code; supported only on Mac OS
 * Does not natively interpret negation
 * Should add phonetics to pre-compilation hashing function
 * Punctuation is not stripped from the students' input, but should be
