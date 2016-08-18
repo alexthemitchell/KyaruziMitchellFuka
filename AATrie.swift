@@ -31,7 +31,7 @@ public class AATrie {
     }
 
     private func nodeForWord(input : String) -> AANode? {
-        let word = input.lowercaseString
+        let word = sanitizeWord(input)
         var consider = root
         for letter in word.characters {
             if let next = consider.children[letter] {
